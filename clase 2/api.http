@@ -1,0 +1,31 @@
+### Recupera las peliculas
+
+GET http://localhost:1234/movies
+
+### Recupera una pelicula
+
+GET http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+
+### Recupera las peliculas por un genero
+
+GET http://localhost:1234/movies?genre=Action
+
+
+### crear una pelicula 
+
+POST  http://localhost:1234/movies
+Content-Type: application/json
+
+{
+    "title":"thdexzdss matrix",
+    "year": 1999,
+    "director":"Lana",
+    "duration": 127,
+    "poster": "https://vice-press.com/cdn/shop/products/Jurassic-Park-Editions-poster-florey.jpg?v=1654518755&width=1024",
+    "genre": [
+      "Adventure",
+      "Sci-Fi"
+    ]
+}
+
+
