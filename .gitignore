@@ -1,6 +1,7 @@
 # build output
 dist/
 .git
+.env
 # generated types
 .astro/
 
