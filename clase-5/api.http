@@ -2,7 +2,7 @@
 GET http://localhost:1234/movies
 
 ### Recuperar una película por id
-GET http://localhost:1234/movies/c8a7d63f-3b04-44d3-9d95-8782fd7dcfaf
+GET http://localhost:1234/movies/9d4d458c-3756-11ef-99ea-0a0027000019
 
 ### Recuperar todas las películas por un género
 GET http://localhost:1234/movies?genre=ACTION
@@ -14,7 +14,7 @@ Content-Type: application/json
 {
   "sql": "SELECT * FROM users",
   "title": "The Godfather",
-  "year": 1975,
+  "year": 2000,
   "director": "Francis Ford Coppola",
   "duration": 175,
   "poster": "https://img.fruugo.com/product/4/49/14441494_max.jpg",
@@ -24,12 +24,11 @@ Content-Type: application/json
   ]
 }
 
-### Borraar una pelicula
-DELETE http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
-
+### Borrar una película
+DELETE http://localhost:1234/movies/aad1b0a1-3756-11ef-99ea-0a0027000019
 
 ### Actualizar una película
-PATCH http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+PATCH http://localhost:1234/movies/a1bc2d26-3757-11ef-99ea-0a0027000019
 Content-Type: application/json
 
 {
