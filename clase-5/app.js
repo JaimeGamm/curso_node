@@ -1,25 +1,20 @@
-import express, { json } from 'express' // require -> commonJS
-import { moviesRouter } from './routes/movies.js'
-import { corsMiddleware } from './middlewares/cors.js'
+import express, { json } from "express"; // require -> commonJS
+import { createMovieRouter } from "./routes/movies.js";
+import { corsMiddleware } from "./middlewares/cors.js";
+import "dotenv/config";
 
-// EN EL FUTURO: el import del json será así:
-// import movies from './movies.json' with { type: 'json' }
+// después
+export const createApp = ({ movieModel }) => {
+  const app = express();
+  app.use(json());
+  app.use(corsMiddleware());
+  app.disable("x-powered-by");
 
-// como leer un json en ESModules
-// import fs from 'node:fs'
-// const movies = JSON.parse(fs.readFileSync('./movies.json', 'utf-8'))
+  app.use("/movies", createMovieRouter({ movieModel }));
 
-// como leer un json en ESModules recomandado por ahora
+  const PORT = process.env.PORT ?? 1234;
 
-const app = express()
-app.use(json())
-app.use(corsMiddleware())
-app.disable('x-powered-by')
-
-app.use('/movies', moviesRouter)
-
-const PORT = process.env.PORT ?? 1234
-
-app.listen(PORT, () => {
-  console.log(`server listening on port http://localhost:${PORT}`)
-})
+  app.listen(PORT, () => {
+    console.log(`server listening on port http://localhost:${PORT}`);
+  });
+};

@@ -2,7 +2,7 @@
 GET http://localhost:1234/movies
 
 ### Recuperar una película por id
-GET http://localhost:1234/movies/9d4d458c-3756-11ef-99ea-0a0027000019
+GET http://localhost:1234/movies/eb0ac250-37d4-11ef-8d71-0a0027000019
 
 ### Recuperar todas las películas por un género
 GET http://localhost:1234/movies?genre=ACTION
@@ -28,9 +28,9 @@ Content-Type: application/json
 DELETE http://localhost:1234/movies/aad1b0a1-3756-11ef-99ea-0a0027000019
 
 ### Actualizar una película
-PATCH http://localhost:1234/movies/a1bc2d26-3757-11ef-99ea-0a0027000019
+PATCH http://localhost:1234/movies/eb0ac250-37d4-11ef-8d71-0a0027000019
 Content-Type: application/json
 
 {
-  "year": 2022
+  "year": 2012
 }

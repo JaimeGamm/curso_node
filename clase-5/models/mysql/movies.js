@@ -1,7 +1,7 @@
 import mysql from "mysql2/promise";
-import { z } from "zod";
+import { preprocess, z } from "zod";
 
-const config = {
+const DEFAULT_CONFING = {
   host: "localhost",
   user: "root",
   port: 3306,
@@ -9,7 +9,11 @@ const config = {
   database: "moviesdb",
 };
 
-const connection = await mysql.createConnection(config);
+const connectionString = process.env.DATABASE_URL
+  ? JSON.parse(process.env.DATABASE_URL)
+  : DEFAULT_CONFING;
+
+const connection = await mysql.createConnection(connectionString);
 
 export class MovieModel {
   static async getAll({ genre }) {
