@@ -11,13 +11,19 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(cookieParser());
 
-app.get("/", (req, res) => {
+app.use((req, res, next) => {
   const token = req.cookies.access_token;
-  if (!token) return res.render("index");
+  req.session = { user: null };
   try {
     const data = jwt.verify(token, SECRET_JWT_KEY);
-    res.render("index", data);
+    req.session.user = data;
   } catch (error) {}
+  next();
+});
+
+app.get("/", (req, res) => {
+  const { user } = req.session;
+  res.render("index", user);
 });
 
 app.post("/login", async (req, res) => {
@@ -59,19 +65,13 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  res.render("protected");
+  res.clearCookie("access_token").json({ message: "Logout succesful" });
 });
 
 app.get("/protected", (req, res) => {
-  const token = req.cookies.access_token;
-  if (!token) return res.status(403).send("Acceso no autorizado");
-  try {
-    const data = jwt.verify(token, SECRET_JWT_KEY);
-    res.render("protected", data);
-  } catch (error) {
-    res.status(401).send("Acceso no autorizado");
-  }
-  res.render("protected", { username: "jaime" });
+  const { user } = req.session;
+  if (!user) return res.status(403).send("Acceso no autorizado");
+  res.render("protected", user);
 });
 
 app.listen(PORT, () => {
