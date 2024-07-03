@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login & Register Forms</title>
     <style>
         *,
         *::before,
@@ -76,11 +76,13 @@
     <div class="container">
       <% if (typeof username !== 'undefined') { %>
         <div class="form-container">
-          <h2>Hola <%= username %> | </h2>
+          <h2>Hola <%= username %> ! </h2>
           <p>Estás en el panel de administración</p>
           <button id="close-session">Cerrar sesión</button>
         </div>
-      <% } else { %>
+      <% } %>
+
+      <% if (typeof username === 'undefined') { %>
         <div class="form-container">
           <form id="login-form">
             <h2>Login</h2>
@@ -89,8 +91,8 @@
             <label for="login-password">Password</label>
             <input type="password" id="login-password" name="password" required>
             <button type="submit">Iniciar sesión</button>
+            <span>&nbsp;</span>
           </form>
-          <span>&nbsp;</span>
         </div>
   
         <div class="form-container">
@@ -121,6 +123,8 @@
             e.preventDefault();
             const username = $('#login-username').value;
             const password = $('#login-password').value;
+            console.log(username, password )
+            //alert(username,  password )
     
             fetch('/login', {
               method: 'POST',
